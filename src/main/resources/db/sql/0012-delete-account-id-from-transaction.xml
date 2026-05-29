@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0012-delete-account-id-from-transaction" author="ghakobyan">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="transaction" columnName="account_id"/>
+        </preConditions>
+        <dropForeignKeyConstraint
+                baseTableName="transaction"
+                constraintName="fk_transaction_account"/>
+
+        <dropColumn tableName="transaction" columnName="account_id"/>
+    </changeSet>
+
+</databaseChangeLog>

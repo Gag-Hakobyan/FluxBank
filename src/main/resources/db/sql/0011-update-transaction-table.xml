@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0011-update-transaction-table" author="ghakobyan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="transaction" columnName="sender_account_id"/>
+            </not>
+            <not>
+                <columnExists tableName="transaction" columnName="recipient_account_id"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="transaction">
+            <column name="sender_account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <addColumn tableName="transaction">
+            <column name="recipient_account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint
+                baseTableName="transaction"
+                baseColumnNames="sender_account_id"
+                referencedTableName="account"
+                referencedColumnNames="id"
+                constraintName="fk_sender_transaction_account"/>
+
+        <addForeignKeyConstraint
+                baseTableName="transaction"
+                baseColumnNames="recipient_account_id"
+                referencedTableName="account"
+                referencedColumnNames="id"
+                constraintName="fk_recipient_transaction_account"/>
+    </changeSet>
+
+</databaseChangeLog>

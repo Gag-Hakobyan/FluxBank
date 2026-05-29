@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0006-add-foreign-key-to-account" author="ghakobyan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists
+                        foreignKeyTableName="account"
+                        foreignKeyName="fk_account_user"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint
+                baseTableName="account"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"
+                constraintName="fk_account_user"/>
+    </changeSet>
+
+</databaseChangeLog>

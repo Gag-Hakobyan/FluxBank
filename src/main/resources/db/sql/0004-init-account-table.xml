@@ -1,0 +1,51 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0004-init-account-table" author="ghakobyan">
+        <createTable tableName="account">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="number" type="varchar(20)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(100)" defaultValue="Main account">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="balance" type="decimal(19,2)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="currency" type="varchar(10)" defaultValue="AMD">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="varchar(20)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="type" type="varchar(20)" defaultValue="DEBIT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="is_default" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_date" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
