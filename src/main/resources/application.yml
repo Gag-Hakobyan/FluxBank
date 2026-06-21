@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: FluxBank
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fluxbank
+    username: postgres
+    password: root
+  liquibase:
+    change-log: classpath*:db/change-log.xml
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: //----------------
+    password: //----------------
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 10MB
+      file-size-threshold: 1MB
+
+jwt:
+  secret: f8d3a9c7b1e64c2f9a0b3d8e6c1d4f7a9b2c5d8e1f4a6c9b0d3e7f1a2c5d8f9
+  expiration: 600000
+
+upload:
+  image:
+    path: D:\Java\FluxBank\upload\image
+
+cb:
+  url: https://cb.am/latest.json.php
